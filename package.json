@@ -7,10 +7,14 @@
   "author": "Zama Bandeira Braga <zama.braga@live.com>",
   "license": "GPL Version 3",
   "scripts": {
-    "test": "./node_modules/mocha/bin/mocha"
+    "test": "./node_modules/.bin/mocha",
+    "doc": "./node_modules/.bin/documentation build src/index.js -f html -o docs",
+    "doc-server": "./node_modules/.bin/documentation serve --watch src/index.js"
   },
   "devDependencies": {
     "chai": "^4.1.2",
+    "documentation": "^7.1.0",
+    "i18n": "^0.8.3",
     "mocha": "^5.2.0"
   }
 }
