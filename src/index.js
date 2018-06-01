@@ -55,6 +55,16 @@ class BooleanHelper {
   isTrue(param) {
     return this._isTrueOrFalse(param, true)
   }
+
+  /**
+   * Checks if a Boolean value is not true, handling null by returning false.
+   * @param {object} param any object
+   * @returns {boolean} that boolean
+   */
+  isNotTrue(param) {
+    return !this._isTrueOrFalse(param, true)
+  }
+
   /**
    * Checks if a Boolean value is false, handling null by returning false.
    * @param {object} param any object
@@ -62,6 +72,15 @@ class BooleanHelper {
    */
   isFalse(param) {
     return this._isTrueOrFalse(param, false)
+  }
+
+  /**
+   * Checks if a Boolean value is not false, handling null by returning false.
+   * @param {object} param any object
+   * @returns {boolean} that boolean
+   */
+  isNotFalse(param) {
+    return !this._isTrueOrFalse(param, false)
   }
 }
 
