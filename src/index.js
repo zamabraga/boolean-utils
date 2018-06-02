@@ -82,8 +82,17 @@ class BooleanHelper {
   isNotFalse(param) {
     return !this._isTrueOrFalse(param, false)
   }
+  /**
+   *  Negates the specified boolean.
+   * @param {object} param any object
+   */
+  negate(param) {
+    return !this._isTrueOrFalse(param, true)
+  }
+
+  static create(params) {
+    return new BooleanHelper(params || {})
+  }
 }
 
-module.exports = function(params) {
-  return new BooleanHelper(params || {})
-}
+module.exports = BooleanHelper
