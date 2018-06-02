@@ -9,11 +9,6 @@ const booleanTranslate = {
   error: 'not a boolean'
 }
 
-const booleanInt = {
-  [booleanEnum.true]: 1,
-  [booleanEnum.false]: 0
-}
-
 /**
  * @class BooleanHelper
  */
@@ -35,7 +30,7 @@ class BooleanHelper {
       case 'string':
         return (
           param.toLowerCase() === booleanEnum[value] ||
-          param === booleanInt[value].toString() ||
+          param === (~~value).toString() ||
           (this.i18n === undefined &&
             param.toLowerCase() ===
               this.booleanKeys[booleanEnum[value]].toLowerCase()) ||
@@ -44,7 +39,7 @@ class BooleanHelper {
               this.i18n.__(booleanEnum[value]).toLowerCase())
         )
       case 'number':
-        return param === booleanInt[value]
+        return param === ~~value
     }
     throw booleanTranslate.error
   }
@@ -99,6 +94,7 @@ class BooleanHelper {
   toBoolean(param) {
     return this._isTrueOrFalse(param, true)
   }
+
   /**
    *   Converts the object to integer value.
    * @param {*} param param any object
@@ -106,6 +102,24 @@ class BooleanHelper {
    */
   toInteger(param) {
     return ~~this._isTrueOrFalse(param, true)
+  }
+
+  /**
+   *   Converts the boolean in string
+   * @param {*} param param any object
+   * @returns string true/false
+   */
+  toString(param) {
+    return this._isTrueOrFalse(param, true).toString()
+  }
+
+  /**
+   *   Converts the boolean in yes/no string
+   * @param {*} param param any object
+   * @returns string  yes/no
+   */
+  toStringYesNo(param) {
+    return booleanTranslate[this._isTrueOrFalse(param, true)]
   }
 
   static create(params) {

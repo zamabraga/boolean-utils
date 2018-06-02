@@ -57,4 +57,12 @@ describe('Boolean', () => {
     tests(booleanUtils.toInteger, 1, trueScenarios)
     tests(booleanUtils.toInteger, 0, falseScenarios)
   })
+  describe('#toString', () => {
+    tests(booleanUtils.toString, 'true', trueScenarios)
+    tests(booleanUtils.toString, 'false', falseScenarios)
+  })
+  describe('#toStringYesNo', () => {
+    tests(booleanUtils.toStringYesNo, 'yes', trueScenarios)
+    tests(booleanUtils.toStringYesNo, 'no', falseScenarios)
+  })
 })
