@@ -8,8 +8,14 @@ i18n.configure({
 })
 
 const booleanUtils = require('./../src')
-const trueScenarios = [true, 'true', 'TRUE', 'yes', 'YES', 1, '1']
-const falseScenarios = [false, 'false', 'FALSE', 'no', 'NO', 0, '0']
+const trueScenarios = [true, 'true', 'TRUE', 'sim', 'SIM', 1, '1']
+const falseScenarios = [false, 'false', 'FALSE', 'não', 'NÃO', 0, '0']
+
+booleanUtils.culture = {
+  true: 'sim',
+  false: 'não',
+  booleanError: 'não é um boleano'
+}
 
 const tests = (f, expectValue, scenarios) => {
   scenarios.forEach(e => {
@@ -28,7 +34,7 @@ const tests = (f, expectValue, scenarios) => {
   })
 }
 
-describe('Boolean', () => {
+describe('Boolean Culture', () => {
   describe('#isTrue', () => {
     tests(booleanUtils.isTrue, true, trueScenarios)
     tests(booleanUtils.isTrue, false, falseScenarios)
@@ -62,7 +68,7 @@ describe('Boolean', () => {
     tests(booleanUtils.toString, 'false', falseScenarios)
   })
   describe('#toStringYesNo', () => {
-    tests(booleanUtils.toStringYesNo, 'yes', trueScenarios)
-    tests(booleanUtils.toStringYesNo, 'no', falseScenarios)
+    tests(booleanUtils.toStringYesNo, 'sim', trueScenarios)
+    tests(booleanUtils.toStringYesNo, 'não', falseScenarios)
   })
 })

@@ -6,21 +6,29 @@ const booleanEnum = {
 const booleanTranslate = {
   [booleanEnum.true]: 'yes',
   [booleanEnum.false]: 'no',
-  error: 'not a boolean'
+  booleanError: 'not a boolean'
 }
 
 /**
  * @class BooleanHelper
  */
 class BooleanHelper {
+  constructor() {
+    this.booleanValues = booleanTranslate
+  }
+
   /**
+   *Set the string reference to boolean
    *
-   * @param {i18n} i18n instance
-   * @param {translateObj} object with boolean translate {true : 'yes', false : 'no'}
+   * @memberof BooleanHelper
+   * {
+   *    true : 'yes',
+   *    false: 'no',
+   *    booleanError : 'not a boolean'
+   * }
    */
-  constructor({ i18n, translateObj }) {
-    this.i18n = i18n
-    this.booleanKeys = Object.assign(booleanTranslate, translateObj)
+  set culture(values) {
+    this.booleanValues = Object.assign(booleanTranslate, values)
   }
 
   _isTrueOrFalse(param, value) {
@@ -33,7 +41,7 @@ class BooleanHelper {
           param === (~~value).toString() ||
           (this.i18n === undefined &&
             param.toLowerCase() ===
-              this.booleanKeys[booleanEnum[value]].toLowerCase()) ||
+              this.booleanValues[booleanEnum[value]].toLowerCase()) ||
           (this.i18n !== undefined &&
             param.toLowerCase() ===
               this.i18n.__(booleanEnum[value]).toLowerCase())
@@ -41,7 +49,7 @@ class BooleanHelper {
       case 'number':
         return param === ~~value
     }
-    throw booleanTranslate.error
+    throw booleanTranslate.booleanError
   }
   /**
    * Checks if a Boolean value is true, handling null by returning false.
@@ -121,10 +129,6 @@ class BooleanHelper {
   toStringYesNo(param) {
     return booleanTranslate[this._isTrueOrFalse(param, true)]
   }
-
-  static create(params) {
-    return new BooleanHelper(params || {})
-  }
 }
 
-module.exports = BooleanHelper
+module.exports = new BooleanHelper()
