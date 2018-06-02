@@ -1,13 +1,6 @@
 const assert = require('chai').assert
-const i18n = require('i18n')
-const ptBr = require('./locales/pt-BR.json')
-i18n.configure({
-  locales: ['pt-BR'],
-  defaultLocale: 'pt-BR',
-  directory: __dirname + '/locales'
-})
 
-const booleanUtils = require('./../src')
+const booleanUtils = require('./../src').create()
 const trueScenarios = [true, 'true', 'TRUE', 'yes', 'YES', 1, '1']
 const falseScenarios = [false, 'false', 'FALSE', 'no', 'NO', 0, '0']
 

@@ -1,14 +1,17 @@
 const assert = require('chai').assert
+const i18n = require('i18n')
+const ptBr = require('./locales/pt-BR.json')
+i18n.configure({
+  locales: ['pt-BR'],
+  defaultLocale: 'pt-BR',
+  directory: __dirname + '/locales'
+})
 
 const booleanUtils = require('./../src').create()
 const trueScenarios = [true, 'true', 'TRUE', 'sim', 'SIM', 1, '1']
 const falseScenarios = [false, 'false', 'FALSE', 'não', 'NÃO', 0, '0']
 
-booleanUtils.culture = {
-  true: 'sim',
-  false: 'não',
-  booleanError: 'não é um boleano'
-}
+booleanUtils.usei18n = true
 
 const tests = (f, expectValue, scenarios) => {
   scenarios.forEach(e => {
@@ -27,7 +30,7 @@ const tests = (f, expectValue, scenarios) => {
   })
 }
 
-describe('Boolean Culture', () => {
+describe('Boolean i18n', () => {
   describe('#isTrue', () => {
     tests(booleanUtils.isTrue, true, trueScenarios)
     tests(booleanUtils.isTrue, false, falseScenarios)

@@ -15,6 +15,7 @@ const booleanTranslate = {
 class BooleanHelper {
   constructor() {
     this.booleanValues = booleanTranslate
+    this.i18n = null
   }
 
   /**
@@ -31,6 +32,10 @@ class BooleanHelper {
     this.booleanValues = Object.assign(booleanTranslate, values)
   }
 
+  set usei18n(use) {
+    if (use && !this.i18n) this.i18n = require('i18n')
+  }
+
   _isTrueOrFalse(param, value) {
     switch (typeof param) {
       case 'boolean':
@@ -39,13 +44,14 @@ class BooleanHelper {
         return (
           param.toLowerCase() === booleanEnum[value] ||
           param === (~~value).toString() ||
-          (this.i18n === undefined &&
+          (this.i18n === null &&
             param.toLowerCase() ===
               this.booleanValues[booleanEnum[value]].toLowerCase()) ||
-          (this.i18n !== undefined &&
+          (this.i18n !== null &&
             param.toLowerCase() ===
               this.i18n.__(booleanEnum[value]).toLowerCase())
         )
+
       case 'number':
         return param === ~~value
     }
@@ -127,8 +133,15 @@ class BooleanHelper {
    * @returns string  yes/no
    */
   toStringYesNo(param) {
-    return booleanTranslate[this._isTrueOrFalse(param, true)]
+    const k = this._isTrueOrFalse(param, true)
+    return this.i18n !== null
+      ? this.i18n.__(booleanEnum[k]).toLowerCase()
+      : booleanTranslate[k]
+  }
+
+  static create() {
+    return new BooleanHelper()
   }
 }
 
-module.exports = new BooleanHelper()
+module.exports = BooleanHelper
