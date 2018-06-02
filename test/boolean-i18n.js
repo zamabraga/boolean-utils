@@ -7,30 +7,29 @@ i18n.configure({
   directory: __dirname + '/locales'
 })
 
-const booleanUtils = require('./../src').create()
-const trueScenarios = [true, 'true', 'TRUE', 'sim', 'SIM', 1, '1']
-const falseScenarios = [false, 'false', 'FALSE', 'não', 'NÃO', 0, '0']
-
-booleanUtils.usei18n = true
-
-const tests = (f, expectValue, scenarios) => {
-  scenarios.forEach(e => {
-    switch (typeof e) {
-      case 'string':
-        it(`should return ${expectValue.toString()} when pass "${e}"`, () => {
-          assert.equal(expectValue, f.call(booleanUtils, e))
-        })
-        break
-      default:
-        it(`should return ${expectValue.toString()} when pass ${e}`, () => {
-          assert.equal(expectValue, f.call(booleanUtils, e))
-        })
-        break
-    }
-  })
-}
-
 describe('Boolean i18n', () => {
+  const booleanUtils = require('./../src')
+  const trueScenarios = [true, 'true', 'TRUE', 'sim', 'SIM', 1, '1']
+  const falseScenarios = [false, 'false', 'FALSE', 'não', 'NÃO', 0, '0']
+
+  booleanUtils.useI18n()
+
+  const tests = (f, expectValue, scenarios) => {
+    scenarios.forEach(e => {
+      switch (typeof e) {
+        case 'string':
+          it(`should return ${expectValue.toString()} when pass "${e}"`, () => {
+            assert.equal(expectValue, f.call(booleanUtils, e))
+          })
+          break
+        default:
+          it(`should return ${expectValue.toString()} when pass ${e}`, () => {
+            assert.equal(expectValue, f.call(booleanUtils, e))
+          })
+          break
+      }
+    })
+  }
   describe('#isTrue', () => {
     tests(booleanUtils.isTrue, true, trueScenarios)
     tests(booleanUtils.isTrue, false, falseScenarios)

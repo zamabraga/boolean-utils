@@ -28,12 +28,14 @@ class BooleanHelper {
    *    booleanError : 'not a boolean'
    * }
    */
-  set culture(values) {
-    this.booleanValues = Object.assign(booleanTranslate, values)
+  culture(values) {
+    if (values) this.booleanValues = Object.assign(booleanTranslate, values)
+    else this.booleanValues = booleanTranslate
   }
 
-  set usei18n(use) {
+  useI18n(use = true) {
     if (use && !this.i18n) this.i18n = require('i18n')
+    else if (use == false) this.i18n = null
   }
 
   _isTrueOrFalse(param, value) {
@@ -138,10 +140,6 @@ class BooleanHelper {
       ? this.i18n.__(booleanEnum[k]).toLowerCase()
       : booleanTranslate[k]
   }
-
-  static create() {
-    return new BooleanHelper()
-  }
 }
 
-module.exports = BooleanHelper
+module.exports = new BooleanHelper()

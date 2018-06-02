@@ -1,27 +1,29 @@
 const assert = require('chai').assert
 
-const booleanUtils = require('./../src').create()
-const trueScenarios = [true, 'true', 'TRUE', 'yes', 'YES', 1, '1']
-const falseScenarios = [false, 'false', 'FALSE', 'no', 'NO', 0, '0']
-
-const tests = (f, expectValue, scenarios) => {
-  scenarios.forEach(e => {
-    switch (typeof e) {
-      case 'string':
-        it(`should return ${expectValue.toString()} when pass "${e}"`, () => {
-          assert.equal(expectValue, f.call(booleanUtils, e))
-        })
-        break
-      default:
-        it(`should return ${expectValue.toString()} when pass ${e}`, () => {
-          assert.equal(expectValue, f.call(booleanUtils, e))
-        })
-        break
-    }
-  })
-}
+const booleanUtils = require('./../src')
 
 describe('Boolean', () => {
+  const trueScenarios = [true, 'true', 'TRUE', 'yes', 'YES', 1, '1']
+  const falseScenarios = [false, 'false', 'FALSE', 'no', 'NO', 0, '0']
+
+  const tests = (f, expectValue, scenarios) => {
+    scenarios.forEach(e => {
+      switch (typeof e) {
+        case 'string':
+          it(`should return ${expectValue.toString()} when pass "${e}"`, () => {
+            assert.equal(expectValue, f.call(booleanUtils, e))
+          })
+          break
+        default:
+          it(`should return ${expectValue.toString()} when pass ${e}`, () => {
+            assert.equal(expectValue, f.call(booleanUtils, e))
+          })
+          break
+      }
+    })
+  }
+
+  before(() => {})
   describe('#isTrue', () => {
     tests(booleanUtils.isTrue, true, trueScenarios)
     tests(booleanUtils.isTrue, false, falseScenarios)
