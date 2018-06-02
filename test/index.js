@@ -49,4 +49,8 @@ describe('Boolean', () => {
     tests(booleanUtils.isNotFalse, true, trueScenarios)
     tests(booleanUtils.isNotFalse, false, falseScenarios)
   })
+  describe('#negate', () => {
+    tests(booleanUtils.negate, false, trueScenarios)
+    tests(booleanUtils.negate, true, falseScenarios)
+  })
 })
