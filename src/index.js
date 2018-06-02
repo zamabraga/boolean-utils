@@ -5,7 +5,8 @@ const booleanEnum = {
 
 const booleanTranslate = {
   [booleanEnum.true]: 'yes',
-  [booleanEnum.false]: 'no'
+  [booleanEnum.false]: 'no',
+  error: 'not a boolean'
 }
 
 const booleanInt = {
@@ -45,7 +46,7 @@ class BooleanHelper {
       case 'number':
         return param === booleanInt[value]
     }
-    return false
+    throw booleanTranslate.error
   }
   /**
    * Checks if a Boolean value is true, handling null by returning false.
@@ -88,6 +89,16 @@ class BooleanHelper {
    */
   negate(param) {
     return !this._isTrueOrFalse(param, true)
+  }
+
+  /**
+   *   Converts the object to boolean.
+   * @param {*} param
+   * @returns
+   * @memberof BooleanHelper
+   */
+  toBoolean(param) {
+    return this._isTrueOrFalse(param, true)
   }
 
   static create(params) {

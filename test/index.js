@@ -53,4 +53,8 @@ describe('Boolean', () => {
     tests(booleanUtils.negate, false, trueScenarios)
     tests(booleanUtils.negate, true, falseScenarios)
   })
+  describe('#toBoolean', () => {
+    tests(booleanUtils.toBoolean, true, trueScenarios)
+    tests(booleanUtils.toBoolean, false, falseScenarios)
+  })
 })
