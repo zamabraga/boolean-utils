@@ -16,12 +16,12 @@ const tests = (f, expectValue, scenarios) => {
     switch (typeof e) {
       case 'string':
         it(`should return ${expectValue.toString()} when pass "${e}"`, () => {
-          assert.equal(f.call(booleanUtils, e), expectValue)
+          assert.equal(expectValue, f.call(booleanUtils, e))
         })
         break
       default:
         it(`should return ${expectValue.toString()} when pass ${e}`, () => {
-          assert.equal(f.call(booleanUtils, e), expectValue)
+          assert.equal(expectValue, f.call(booleanUtils, e))
         })
         break
     }
@@ -52,5 +52,9 @@ describe('Boolean', () => {
   describe('#toBoolean', () => {
     tests(booleanUtils.toBoolean, true, trueScenarios)
     tests(booleanUtils.toBoolean, false, falseScenarios)
+  })
+  describe('#toInteger', () => {
+    tests(booleanUtils.toInteger, 1, trueScenarios)
+    tests(booleanUtils.toInteger, 0, falseScenarios)
   })
 })

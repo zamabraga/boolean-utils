@@ -93,12 +93,19 @@ class BooleanHelper {
 
   /**
    *   Converts the object to boolean.
-   * @param {*} param
-   * @returns
-   * @memberof BooleanHelper
+   * @param {*} param param any object
+   * @returns boolean value
    */
   toBoolean(param) {
     return this._isTrueOrFalse(param, true)
+  }
+  /**
+   *   Converts the object to integer value.
+   * @param {*} param param any object
+   * @returns integer value
+   */
+  toInteger(param) {
+    return ~~this._isTrueOrFalse(param, true)
   }
 
   static create(params) {
