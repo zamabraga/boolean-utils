@@ -26,10 +26,6 @@ const tests = (f, expectValue, scenarios) => {
         break
     }
   })
-
-  // it(`should return ${expectValue} when pass "yes" in pt-BR`, () => {
-  //   af(createBooleanUtils({ translateObj: ptBr }).isTrue('sim'))
-  // })
 }
 
 describe('Boolean', () => {
